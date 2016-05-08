@@ -1,0 +1,18 @@
+<!--DOCTYPE html-->
+<html>
+<head>
+	<title>Index</title>
+</head>
+<body>
+<h1>Template is working!!</h1>
+<h2>{{title}}</h2>
+{% for obj in Apps %}
+<a href='{{ obj.get_absolute_url }}'><h2>{{obj.id}}. {{obj.service_name}}</h2></a>  <!-- can use this in href, but remove get_absolute_url from models {% url "services:detail" id=obj.id %} -->
+<!-- {{obj.curent_status}}<br>
+{{obj.prev_status}}<br>
+{{obj.last_updated_time}}<br>
+{{obj.pid}}<br><br> -->
+{% endfor %}
+
+</body>
+</html>
