@@ -5,6 +5,7 @@ from .models import services #OR from services.models import services
 # Create your views here.
 import re
 import subprocess
+from django.utils import timezone
 
 def services_create(request):
 	return HttpResponse("<h1>Create</h1>")
@@ -35,15 +36,17 @@ def services_list(request):		#Listing the services
 	
 	service = subprocess.Popen(["service","--status-all"], stdout=subprocess.PIPE)
 	service_data = service.communicate()[0]
-	#print (service_data)
-
-
 	contentToArray=re.findall(r'\s*\[\s+(\+|\-)\s+\]\s+(.*)\s*', service_data)
-
-	#print (contentToArray)
 	for x in contentToArray:
-	 	print ("LINE: %s, %s" %(x[0],x[1]))
-	 	services.objects.create(service_name=x[1], current_status=x[0], prev_status=x[0])
+	 	get_service = services.objects.filter(service_name=x[1])
+	 	if get_service:
+	 		for obj in get_service:
+	 			# print "id: %s, service: %s, status: %s, time: %s" %(obj.id, obj.service_name, obj.current_status, obj.last_updated_time)	
+		 		ser = services(id=obj.id, service_name=obj.service_name, current_status=x[0], prev_status='tesst', last_updated_time=timezone.now(), pid=0)
+		 		ser.save(force_update=True)
+	 	else:
+	 		services.objects.create(service_name=x[1], current_status=x[0], prev_status=x[0])
+	 		pass
 	service_list = services.objects.all()
 	list_data = {
 		"title": "List of Services",

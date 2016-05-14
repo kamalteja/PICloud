@@ -1,0 +1,32 @@
+root       638  0.0  0.1   4400  1020 ?        Ss   11:12   0:00 /usr/sbin/acpid
+root      1397  0.0  0.1 263264  1880 ?        Ss   11:12   0:00 /usr/sbin/apache2 -k start
+www-data  1650  0.0  0.0 263288   648 ?        S    11:17   0:00 /usr/sbin/apache2 -k start
+www-data  1651  0.0  0.0 263288   512 ?        S    11:17   0:00 /usr/sbin/apache2 -k start
+www-data  1652  0.0  0.0 263288   648 ?        S    11:17   0:00 /usr/sbin/apache2 -k start
+www-data  1653  0.0  0.0 263288   648 ?        S    11:17   0:00 /usr/sbin/apache2 -k start
+www-data  1654  0.0  0.0 263288   648 ?        S    11:17   0:00 /usr/sbin/apache2 -k start
+avahi      620  0.0  0.2  44916  2260 ?        Ss   11:12   0:00 avahi-daemon: running [terminater.local]
+avahi      639  0.0  0.0  44788    20 ?        S    11:12   0:00 avahi-daemon: chroot helper
+term      2121  0.0  0.2 357644  2324 ?        Ssl  11:18   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+root       585  0.0  0.1  37604  1780 ?        Ss   11:12   0:00 /usr/sbin/cron -f
+root       731  0.0  0.1 274828  1628 ?        Ssl  11:12   0:00 /usr/sbin/cups-browsed
+root       731  0.0  0.1 274828  1628 ?        Ssl  11:12   0:00 /usr/sbin/cups-browsed
+message+   561  0.0  0.3  44304  3388 ?        Ss   11:12   0:09 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+nobody     788  0.0  0.1  61464  1728 ?        S    11:12   0:00 /usr/sbin/dnsmasq --no-resolv --keep-in-foreground --no-hosts --bind-interfaces --pid-file=/var/run/NetworkManager/dnsmasq.pid --listen-address=127.0.1.1 --cache-size=0 --proxy-dnssec --enable-dbus=org.freedesktop.NetworkManager.dnsmasq --conf-dir=/etc/NetworkManager/dnsmasq.d
+term      1944  0.0  0.3  43824  3068 ?        Ss   11:18   0:01 dbus-daemon --fork --session --address=unix:abstract=/tmp/dbus-pzynbOVnmz
+term      2002  0.0  0.0  41488   704 ?        S    11:18   0:00 upstart-dbus-bridge --daemon --session --user --bus-name session
+term      2004  0.0  0.0  41392   924 ?        S    11:18   0:00 upstart-dbus-bridge --daemon --system --user --bus-name system
+term      2046  0.0  0.1  43032  1688 ?        S    11:18   0:00 /usr/bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+root       749  0.0  0.4 365928  4124 ?        SLsl 11:12   0:00 /usr/sbin/lightdm
+root       763  4.6  7.0 442840 71768 tty7     Ss+  11:12  10:17 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+root      1087  0.0  0.1 230300  1892 ?        Sl   11:12   0:00 lightdm --session-child 12 19
+mysql     1271  0.0  5.9 1785088 60612 ?       Ssl  11:12   0:07 /usr/sbin/mysqld
+term      5948  0.0  0.4  44496  4640 pts/4    S+   12:04   0:00 mysql -u root -p
+syslog     579  0.0  0.1 256396  1288 ?        Ssl  11:12   0:00 /usr/sbin/rsyslogd -n
+shellin+  1382  0.0  0.0  32904   136 ?        Ss   11:12   0:00 /usr/bin/shellinaboxd -q --background=/var/run/shellinaboxd.pid -c /var/lib/shellinabox -p 52625 -u shellinabox -g shellinabox --user-css Black on White:+/etc/shellinabox/options-enabled/00+Black on White.css,White On Black:-/etc/shellinabox/options-enabled/00_White On Black.css;Color Terminal:+/etc/shellinabox/options-enabled/01+Color Terminal.css,Monochrome:-/etc/shellinabox/options-enabled/01_Monochrome.css --no-beep -s /:SSH:192.168.184.15
+shellin+  1383  0.0  0.0  32872   696 ?        S    11:12   0:00 /usr/bin/shellinaboxd -q --background=/var/run/shellinaboxd.pid -c /var/lib/shellinabox -p 52625 -u shellinabox -g shellinabox --user-css Black on White:+/etc/shellinabox/options-enabled/00+Black on White.css,White On Black:-/etc/shellinabox/options-enabled/00_White On Black.css;Color Terminal:+/etc/shellinabox/options-enabled/01+Color Terminal.css,Monochrome:-/etc/shellinabox/options-enabled/01_Monochrome.css --no-beep -s /:SSH:192.168.184.15
+snmp      1391  0.0  0.1  68268  1860 ?        S    11:12   0:03 /usr/sbin/snmpd -Lsd -Lf /dev/null -u snmp -g snmp -I -smux mteTrigger mteTriggerConf -p /run/snmpd.pid
+root      1261  0.0  0.1  65612  1388 ?        Ss   11:12   0:00 /usr/sbin/sshd -D
+root       246  0.0  0.1  45192  1948 ?        Ss   11:12   0:00 /lib/systemd/systemd-udevd
+term      1937  0.0  0.1  41456  1388 ?        S    11:18   0:00 upstart-udev-bridge --daemon --user
+whoopsie   616  0.0  0.3 452232  3140 ?        Ssl  11:12   0:00 /usr/bin/whoopsie -f
