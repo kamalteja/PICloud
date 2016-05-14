@@ -7,10 +7,10 @@ from django.core.urlresolvers import reverse
 
 class services(models.Model):
 	service_name = models.CharField(max_length = 40)
-	current_status = models.CharField(max_length = 5)
-	prev_status = models.CharField(max_length = 5)
+	current_status = models.CharField(max_length = 15)
+	prev_status = models.CharField(max_length = 15)
 	last_updated_time = models.DateTimeField(auto_now=False, auto_now_add=True)
-	pid = models.IntegerField(blank=True, default=0)
+	pid = models.TextField()
 
 
 	def __unicode__(self):
