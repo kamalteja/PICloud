@@ -1,7 +1,9 @@
+{% load staticfiles %}
 <!--DOCTYPE html-->
 <html>
 <head>
 	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
 </head>
 <body>
 <h1>{{header}}</h1>
@@ -12,6 +14,15 @@
 <b>Previous Status: </b><b>{{App.prev_status}}<br></b>
 <b>Time of Update: </b><b>{{App.last_updated_time}}<br></b>
 <b>Process ID: </b><b>{{App.pid}}<br><br></b>
+ 
+ <!-- Switch ON/OFF -->
+<div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div>
 
 </body>
 </html>

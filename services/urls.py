@@ -22,7 +22,7 @@ from services.views import (
 	services_update,
 	services_detail,
 	services_create)
-
+ 
 urlpatterns = [
     url(r'^$', services_list),
     url(r'^create/', services_create),
