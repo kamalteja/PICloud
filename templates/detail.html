@@ -9,14 +9,27 @@
 </head>
 <body>
 <h1>{{header}}</h1>
-<h2>{{Service_title}}</h2>
-
-<b>Service Name:</b><b>{{App.service_name}}<br></b>
-<b>Current Status: </b><b>{{App.current_status}}<br></b>
-<b>Previous Status: </b><b>{{App.prev_status}}<br></b>
-<b>Time of Update: </b><b>{{App.last_updated_time}}<br></b>
-<b>Process ID: </b><b>{{App.pid}}<br><br></b>
- 
+<fieldset>
+<legend><h2>{{Service_title}}</h2></legend>
+	<table cellpadding="10" cellspacing="3" border=3 width="700" align="left" style="border-color:14A480;">
+	<tr>
+		<td><b>Service Name:</b></td><td><b>{{App.service_name}}</b></td>
+	</tr>
+	<tr>
+		<td><b>Current Status:</b></td><td><b>{{App.current_status}}</b></td>
+	</tr>
+	<tr>
+		<td><b>Previous Status:</b></td><td><b>{{App.prev_status}}</b></td>
+	</tr>
+	<tr>
+		<td><b>Time of Update:</b></td><td><b>{{App.last_updated_time}}</b></td>
+	</tr>
+	<tr>
+		<td><b>Process ID:</b></td><td><b>{{App.pid}}</b></td>
+	</tr>
+	
+	</table>
+</fieldset>
  <!-- Switch ON/OFF -->
 <form id="{{App.id}}" method="POST" action="/services/id={{App.id}}/"> {% csrf_token %}
 <div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>

@@ -51,14 +51,6 @@ def services_list(request):
 	# 	"title": "Authentication Required"
 	# 	}
 
-
-	#Listing the services
-	# newpid = os.fork()
-	# if newpid == 0:
-	# 	list_data = services_list_child(request)
-	# 	print list_data
-	# 	return render(request, "list.html", list_data)
-	# else:
 	return render(request, "list.html",services_list_child())
 def services_update(request):
 	return HttpResponse("<h1>Update</h1>")
