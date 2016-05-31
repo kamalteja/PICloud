@@ -2,19 +2,20 @@
 <!--DOCTYPE html-->
 <html>
 <head>
-	<title>Index</title>
+	<title>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href='{% static "css/style.css" %}'>
+	<script type="text/javascript" src='{% static "js/general.js" %}'></script>
 </head>
 <body>
-<h1>Template is working!!</h1>
-<h2>{{title}}</h2>
+
+<h1>{{title}}</h1>
 {% for obj in Apps %}
 <a href='{{ obj.get_absolute_url }}'><h2>{{obj.id}}. {{obj.service_name}}</h2></a>  <!-- can use this in href, but remove get_absolute_url from models {% url "services:detail" id=obj.id %} -->
 
 <!-- Switch ON/OFF -->
 <div class="onoffswitch">
-    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-    <label class="onoffswitch-label" for="myonoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{obj.id}}" {{obj.stat}}>
+    <label class="onoffswitch-label" for="myonoffswitch-{{obj.id}}">
         <span class="onoffswitch-inner"></span>
         <span class="onoffswitch-switch"></span>
     </label>

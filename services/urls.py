@@ -18,6 +18,7 @@ from django.contrib import admin
 #or
 from services.views import (
 	services_list,
+	services_list_child,
 	services_delete,
 	services_update,
 	services_detail,
@@ -25,6 +26,7 @@ from services.views import (
  
 urlpatterns = [
     url(r'^$', services_list),
+    #url(r'^$', services_list_child),
     url(r'^create/', services_create),
     url(r'^id=(?P<id>\d+)/$', services_detail, name='detail'),
     url(r'^update/', services_update),
