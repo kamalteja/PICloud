@@ -29,7 +29,7 @@ urlpatterns = [
     #url(r'^$', services_list_child),
     url(r'^create/', services_create),
     url(r'^id=(?P<id>\d+)/$', services_detail, name='detail'),
-    url(r'^update/', services_update),
+    #url(r'^update-id=(?P<id>\d+)/', services_update),
     url(r'^delete/', services_delete),
 
 ]

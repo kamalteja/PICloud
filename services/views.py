@@ -13,38 +13,14 @@ def services_create(request):
 
 def services_detail(request, id):
 	if request.user.is_authenticated():
-		if request.method == "POST" :
-			#print request.POST
-			serName = request.POST.get('serName')
-			if 'switch' in request.POST.keys():
-				switch = request.POST.get('switch')
-				print "%s: %s, id: %s" %(serName, switch, id)
-				ser = services(id=id, service_name=serName, current_status="UP", prev_status="DOWN", last_updated_time=timezone.now(), pid="To Be fetched")
-			 	ser.save()
-			elif 'switch' not in request.POST.keys():
-				switch = "OFF"
-				print "%s: %s, id: %s" %(serName, switch, id)
-				ser = services(id=id, service_name=serName, current_status="Down", prev_status="UP", last_updated_time=timezone.now(), pid="To Be fetched")
-			 	ser.save()
-
-		instance = get_object_or_404(services, id=id) #instance = services.objects.get(id=id)
-		if instance.current_status=="UP":
-			setattr(instance, 'stat', 'checked')	
-		else:
-			setattr(instance, 'stat', '')
-		list_data = {
-			"header":	"Detailed Information",
-			"Service_title": instance.service_name,
-			"App": instance
-		}
+		list_data = services_detail_child(request, id)
 	else:
 		list_data = {
 		"header": ""
 		}
 	return render(request, "detail.html", list_data)
 
-def services_list(request):	
-
+def services_list(request):
 	if request.user.is_authenticated():
 		list_data = services_list_child()
 	else:
@@ -52,16 +28,26 @@ def services_list(request):
 		"title": ""
 		}
 	return render(request, "list.html", list_data)
-	#Listing the services
-	# newpid = os.fork()
-	# if newpid == 0:
-	# 	list_data = services_list_child(request)
-	# 	print list_data
-	# 	return render(request, "list.html", list_data)
-	# else:
 	
-def services_update(request):
-	return HttpResponse("<h1>Update</h1>")
+def services_update(request, id):
+	serName = request.POST.get('serName')
+	if 'switch' in request.POST.keys():
+		switch = request.POST.get('switch')
+		print "%s: %s, id: %s" %(serName, switch, id)
+		py_shell = subprocess.Popen(["pgrep",serName], stdout=subprocess.PIPE)
+	 	service_pid = re.sub(r'(\d)\n(\d)', r'\1,\2',py_shell.communicate()[0])
+	 	service_pid = re.sub(r'\n', '', service_pid)
+		ser = services(id=id, service_name=serName, current_status="UP", prev_status="DOWN", last_updated_time=timezone.now(), pid=service_pid)
+	 	ser.save()
+	elif 'switch' not in request.POST.keys():
+		switch = "OFF"
+		print "%s: %s, id: %s" %(serName, switch, id)
+		get_service = services.objects.filter(service_name=serName)
+		for obj in get_service:
+			service_pid = re.sub(r',', ' ', obj.pid)
+			py_shell = subprocess.Popen(["kill",service_pid,"2>&1"], stdout=subprocess.PIPE)
+			ser = services(id=id, service_name=serName, current_status="DOWN", prev_status="UP", last_updated_time=timezone.now(), pid="Process Output: "+py_shell)
+			ser.save()
 
 def services_delete(request):
 	return HttpResponse("<h1>Delete</h1>")
@@ -75,7 +61,7 @@ def services_list_child():
 	 	service_pid = re.sub(r'(\d)\n(\d)', r'\1,\2',py_shell.communicate()[0])
 	 	service_pid = re.sub(r'\n', '', service_pid)
 	 	if service_pid:
-	 		pass
+	 		service_pid = service_pid
 	 	else:
 	 		service_pid = 0
 	 	if service_status[0] == "+":
@@ -96,7 +82,6 @@ def services_list_child():
 		 			stat = ""
 	 	else:
 	 		services.objects.create(service_name=service_status[1], current_status=current_service_status, prev_status=current_service_status, pid=service_pid)
-	 		pass
 	service_list = services.objects.all()
 	for obj in service_list:
 		if obj.current_status=="UP":
@@ -106,5 +91,21 @@ def services_list_child():
 	list_data = {
 		"title": "List of Services",
 		"Apps": service_list,
+	}
+	return list_data
+
+def services_detail_child(request, id):
+	if request.method == "POST" :
+		services_update(request, id)
+
+	instance = get_object_or_404(services, id=id) #instance = services.objects.get(id=id)
+	if instance.current_status=="UP":
+		setattr(instance, 'stat', 'checked')	
+	else:
+		setattr(instance, 'stat', '')
+	list_data = {
+		"header":	"Detailed Information",
+		"Service_title": instance.service_name,
+		"App": instance
 	}
 	return list_data

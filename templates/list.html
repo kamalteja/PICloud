@@ -11,7 +11,7 @@
 {% if title %}
 	<h1>{{title}}</h1>
 	{% for obj in Apps %}
-		<a href='{{ obj.get_absolute_url }}'><h2>{{obj.id}}. {{obj.service_name}}</h2></a>  <!-- can use this in href, but remove get_absolute_url from models {% url "services:detail" id=obj.id %} -->
+		<h2>{{obj.id}}. <a href='{{ obj.get_absolute_url }}'>{{obj.service_name}}</h2></a>  <!-- can use this in href, but remove get_absolute_url from models {% url "services:detail" id=obj.id %} -->
 
 		<!-- Switch ON/OFF -->
 		<div class="onoffswitch">
