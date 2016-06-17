@@ -8,24 +8,27 @@
 </head>
 <body>
 
-<h1>{{title}}</h1>
-{% for obj in Apps %}
-<a href='{{ obj.get_absolute_url }}'><h2>{{obj.id}}. {{obj.service_name}}</h2></a>  <!-- can use this in href, but remove get_absolute_url from models {% url "services:detail" id=obj.id %} -->
+{% if title %}
+	<h1>{{title}}</h1>
+	{% for obj in Apps %}
+		<a href='{{ obj.get_absolute_url }}'><h2>{{obj.id}}. {{obj.service_name}}</h2></a>  <!-- can use this in href, but remove get_absolute_url from models {% url "services:detail" id=obj.id %} -->
 
-<!-- Switch ON/OFF -->
-<div class="onoffswitch">
-    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{obj.id}}" {{obj.stat}}>
-    <label class="onoffswitch-label" for="myonoffswitch-{{obj.id}}">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
-</div>
+		<!-- Switch ON/OFF -->
+		<div class="onoffswitch">
+		    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-{{obj.id}}" {{obj.stat}}>
+		    <label class="onoffswitch-label" for="myonoffswitch-{{obj.id}}">
+		        <span class="onoffswitch-inner"></span>
+		        <span class="onoffswitch-switch"></span>
+		    </label>
+		</div>
 
-<!-- {{obj.curent_status}}<br>
-{{obj.prev_status}}<br>
-{{obj.last_updated_time}}<br>
-{{obj.pid}}<br><br> -->
-{% endfor %}
- 
+		<!-- {{obj.curent_status}}<br>
+		{{obj.prev_status}}<br>
+		{{obj.last_updated_time}}<br>
+		{{obj.pid}}<br><br> -->
+	{% endfor %}
+{% else %}
+	Authetication required
+{% endif %}
 </body>
 </html>

@@ -8,42 +8,46 @@
 	<script type="text/javascript" src='{% static "js/general.js" %}'></script>
 </head>
 <body>
-<h1>{{header}}</h1>
-<fieldset>
-<legend><h2>{{Service_title}}</h2></legend>
-	<table cellpadding="10" cellspacing="3" border=3 width="700" align="left" style="border-color:14A480;">
-	<tr>
-		<td><b>Service Name:</b></td><td><b>{{App.service_name}}</b></td>
-	</tr>
-	<tr>
-		<td><b>Current Status:</b></td><td><b>{{App.current_status}}</b></td>
-	</tr>
-	<tr>
-		<td><b>Previous Status:</b></td><td><b>{{App.prev_status}}</b></td>
-	</tr>
-	<tr>
-		<td><b>Time of Update:</b></td><td><b>{{App.last_updated_time}}</b></td>
-	</tr>
-	<tr>
-		<td><b>Process ID:</b></td><td><b>{{App.pid}}</b></td>
-	</tr>
-	
-	</table>
-</fieldset>
- <!-- Switch ON/OFF -->
-<form id="{{App.id}}" method="POST" action="/services/id={{App.id}}/"> {% csrf_token %}
-<div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>
-<div class="onoffswitch">
-	<input type="hidden" name="serName" value="{{App.service_name}}">
-    <input type="checkbox" name="switch" class="onoffswitch-checkbox" id="myonoffswitch-{{App.id}}" {{App.stat}} onclick="load();document.getElementById({{App.id}}).submit();">
-  
-    <label class="onoffswitch-label" for="myonoffswitch-{{App.id}}">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
-</div>
-</form>
-<div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>
-<a href="/services" onclick="load();"> <-- Back to list</a>
+{% if header %}
+	<h1>{{header}}</h1>
+	<fieldset>
+	<legend><h2>{{Service_title}}</h2></legend>
+		<table cellpadding="10" cellspacing="3" border=3 width="700" align="left" style="border-color:14A480;">
+		<tr>
+			<td><b>Service Name:</b></td><td><b>{{App.service_name}}</b></td>
+		</tr>
+		<tr>
+			<td><b>Current Status:</b></td><td><b>{{App.current_status}}</b></td>
+		</tr>
+		<tr>
+			<td><b>Previous Status:</b></td><td><b>{{App.prev_status}}</b></td>
+		</tr>
+		<tr>
+			<td><b>Time of Update:</b></td><td><b>{{App.last_updated_time}}</b></td>
+		</tr>
+		<tr>
+			<td><b>Process ID:</b></td><td><b>{{App.pid}}</b></td>
+		</tr>
+		
+		</table>
+	</fieldset>
+	 <!-- Switch ON/OFF -->
+	<form id="{{App.id}}" method="POST" action="/services/id={{App.id}}/"> {% csrf_token %}
+	<div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>
+	<div class="onoffswitch">
+		<input type="hidden" name="serName" value="{{App.service_name}}">
+	    <input type="checkbox" name="switch" class="onoffswitch-checkbox" id="myonoffswitch-{{App.id}}" {{App.stat}} onclick="load();document.getElementById({{App.id}}).submit();">
+	  
+	    <label class="onoffswitch-label" for="myonoffswitch-{{App.id}}">
+	        <span class="onoffswitch-inner"></span>
+	        <span class="onoffswitch-switch"></span>
+	    </label>
+	</div>
+	</form>
+	<div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>
+	<a href="/services" onclick="load();"> <-- Back to list</a>
+{% else %}
+	Authetication required
+{% endif %}
 </body>
 </html>

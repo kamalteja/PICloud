@@ -12,45 +12,46 @@ def services_create(request):
 	return HttpResponse("<h1>Create</h1>")
 
 def services_detail(request, id):
-	if request.method == "POST" :
-		#print request.POST
-		serName = request.POST.get('serName')
-		if 'switch' in request.POST.keys():
-			switch = request.POST.get('switch')
-			print "%s: %s, id: %s" %(serName, switch, id)
-			ser = services(id=id, service_name=serName, current_status="UP", prev_status="DOWN", last_updated_time=timezone.now(), pid="To Be fetched")
-		 	ser.save()
-		elif 'switch' not in request.POST.keys():
-			switch = "OFF"
-			print "%s: %s, id: %s" %(serName, switch, id)
-			ser = services(id=id, service_name=serName, current_status="Down", prev_status="UP", last_updated_time=timezone.now(), pid="To Be fetched")
-		 	ser.save()
+	if request.user.is_authenticated():
+		if request.method == "POST" :
+			#print request.POST
+			serName = request.POST.get('serName')
+			if 'switch' in request.POST.keys():
+				switch = request.POST.get('switch')
+				print "%s: %s, id: %s" %(serName, switch, id)
+				ser = services(id=id, service_name=serName, current_status="UP", prev_status="DOWN", last_updated_time=timezone.now(), pid="To Be fetched")
+			 	ser.save()
+			elif 'switch' not in request.POST.keys():
+				switch = "OFF"
+				print "%s: %s, id: %s" %(serName, switch, id)
+				ser = services(id=id, service_name=serName, current_status="Down", prev_status="UP", last_updated_time=timezone.now(), pid="To Be fetched")
+			 	ser.save()
 
-	instance = get_object_or_404(services, id=id) #instance = services.objects.get(id=id)
-	if instance.current_status=="UP":
-		setattr(instance, 'stat', 'checked')	
+		instance = get_object_or_404(services, id=id) #instance = services.objects.get(id=id)
+		if instance.current_status=="UP":
+			setattr(instance, 'stat', 'checked')	
+		else:
+			setattr(instance, 'stat', '')
+		list_data = {
+			"header":	"Detailed Information",
+			"Service_title": instance.service_name,
+			"App": instance
+		}
 	else:
-		setattr(instance, 'stat', '')
-	list_data = {
-		"header":	"Detailed Information",
-		"Service_title": instance.service_name,
-		"App": instance
-	}
+		list_data = {
+		"header": ""
+		}
 	return render(request, "detail.html", list_data)
-
 
 def services_list(request):	
 
-	# if request.user.is_authenticated():
-	# 	list_data = {
-	# 	"title": "List of Services",
-	# 	"Apps": {"sshd", "apache2"},
-	# 	}
-	# else:
-	# 	list_data = {
-	# 	"title": "Authentication Required"
-	# 	}
-	
+	if request.user.is_authenticated():
+		list_data = services_list_child()
+	else:
+		list_data = {
+		"title": ""
+		}
+	return render(request, "list.html", list_data)
 	#Listing the services
 	# newpid = os.fork()
 	# if newpid == 0:
@@ -58,7 +59,7 @@ def services_list(request):
 	# 	print list_data
 	# 	return render(request, "list.html", list_data)
 	# else:
-	return render(request, "list.html",services_list_child())
+	
 def services_update(request):
 	return HttpResponse("<h1>Update</h1>")
 
