@@ -1,5 +1,5 @@
 .onoffswitch {
-    position: relative; width: 90px;
+    position: relative; width: 116px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
@@ -7,34 +7,34 @@
 }
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #F0F0F0; border-radius: 20px;
+    border: 2px solid #FFFFFF; border-radius: 50px;
 }
 .onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 13px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    display: block; float: left; width: 50%; height: 33px; padding: 0; line-height: 33px;
+    font-size: 19px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
     content: "ON";
-    padding-left: 10px;
-    background-color: #0B8C25; color: #FFFFFF;
+    padding-left: 14px;
+    background-color: #EEEEEE; color: #34C295;
 }
 .onoffswitch-inner:after {
     content: "OFF";
-    padding-right: 10px;
-    background-color: #C2C2C2; color: #9E4141;
+    padding-right: 14px;
+    background-color: #EEEEEE; color: #999999;
     text-align: right;
 }
 .onoffswitch-switch {
-    display: block; width: 11px; margin: 9.5px;
-    background: #C7C7C7;
+    display: block; width: 29px; margin: 2px;
+    background: #A1A1A1;
     position: absolute; top: 0; bottom: 0;
-    right: 56px;
-    border: 2px solid #F0F0F0; border-radius: 20px;
+    right: 79px;
+    border: 2px solid #FFFFFF; border-radius: 50px;
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -42,4 +42,18 @@
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
+    background-color: #34C295; 
+}
+
+.unloader {
+    display: none;
+}
+
+.loader {
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
