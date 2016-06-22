@@ -33,7 +33,10 @@
 	</fieldset>
 	 <!-- Switch ON/OFF -->
 	<form id="{{App.id}}" method="POST" action="/services/id={{App.id}}/"> {% csrf_token %}
-	<div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>
+	<div class="unloader" >
+		<img src='{% static "images/gears.svg" %}'>
+		<!-- <input type="text" name=""> -->
+	</div>
 	<div class="onoffswitch">
 		<input type="hidden" name="serName" value="{{App.service_name}}">
 	    <input type="checkbox" name="switch" class="onoffswitch-checkbox" id="myonoffswitch-{{App.id}}" {{App.stat}} onclick="load();document.getElementById({{App.id}}).submit();">
@@ -44,8 +47,8 @@
 	    </label>
 	</div>
 	</form>
-	<div class="unloader" ><img src='{% static "images/gears.svg" %}'></div>
-	<a href="/services" onclick="load();"> <-- Back to list</a>
+	<div class="unloader-list" ><img src='{% static "images/gears.svg" %}'></div>
+	<a href="/services" onclick="load_list();"> <-- Back to list</a>
 {% else %}
 	Authetication required
 {% endif %}

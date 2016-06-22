@@ -52,9 +52,13 @@
     display: none;
 }
 
+.unloader-list{
+    display: none;
+}
+
+
 .loader {
     background-color: #ffffff;
-
     background-size: cover;
     position: absolute;
     z-index: 1;

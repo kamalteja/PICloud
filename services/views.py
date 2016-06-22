@@ -5,7 +5,8 @@ from .models import services #OR from services.models import services
 # Create your views here.
 import re
 import os
-import subprocess
+from subprocess import STDOUT, Popen, PIPE
+#import subprocess
 from django.utils import timezone
 
 def services_create(request):
@@ -34,9 +35,10 @@ def services_update(request, id):
 	if 'switch' in request.POST.keys():
 		switch = request.POST.get('switch')
 		print "%s: %s, id: %s" %(serName, switch, id)
-		py_shell = subprocess.Popen(["pgrep",serName], stdout=subprocess.PIPE)
+		py_shell = Popen(["pgrep",serName], stdout=PIPE)
 	 	service_pid = re.sub(r'(\d)\n(\d)', r'\1,\2',py_shell.communicate()[0])
 	 	service_pid = re.sub(r'\n', '', service_pid)
+	 	#print service_pid
 		ser = services(id=id, service_name=serName, current_status="UP", prev_status="DOWN", last_updated_time=timezone.now(), pid=service_pid)
 	 	ser.save()
 	elif 'switch' not in request.POST.keys():
@@ -45,19 +47,21 @@ def services_update(request, id):
 		get_service = services.objects.filter(service_name=serName)
 		for obj in get_service:
 			service_pid = re.sub(r',', ' ', obj.pid)
-			py_shell = subprocess.Popen(["kill",service_pid,"2>&1"], stdout=subprocess.PIPE)
-			ser = services(id=id, service_name=serName, current_status="DOWN", prev_status="UP", last_updated_time=timezone.now(), pid="Process Output: "+py_shell)
+			py_shell = Popen(["bash -c \"kill "+service_pid+"\""], shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+			IO = py_shell.communicate()[0]
+			print IO
+			ser = services(id=id, service_name=serName, current_status="DOWN", prev_status="UP", last_updated_time=timezone.now(), pid="Process Output: "+IO)
 			ser.save()
 
 def services_delete(request):
 	return HttpResponse("<h1>Delete</h1>")
 
 def services_list_child():
-	py_shell = subprocess.Popen(["service","--status-all"], stdout=subprocess.PIPE)
+	py_shell = Popen(["service","--status-all"], stdout=PIPE)
 	service_data = py_shell.communicate()[0]
 	contentToArray=re.findall(r'\s*\[\s+(\+|\-)\s+\]\s+(.*)\s*', service_data)
 	for service_status in contentToArray:
-		py_shell = subprocess.Popen(["pgrep",service_status[1]], stdout=subprocess.PIPE)
+		py_shell = Popen(["pgrep",service_status[1]], stdout=PIPE)
 	 	service_pid = re.sub(r'(\d)\n(\d)', r'\1,\2',py_shell.communicate()[0])
 	 	service_pid = re.sub(r'\n', '', service_pid)
 	 	if service_pid:
