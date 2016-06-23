@@ -23,7 +23,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^services/', include("services.urls", namespace="services")),
-    url(r'^auth/', include("auth.urls", namespace="auth")),
+    url(r'^', include("auth.urls", namespace="auth")),
 ]
 
 if settings.DEBUG:
