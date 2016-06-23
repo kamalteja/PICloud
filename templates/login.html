@@ -12,10 +12,14 @@
 
 <div class="logo"></div>
 <div class="login-block">
-    <h1>Home Cloud</h1>
-    <input type="text" value="" placeholder="Username" id="username" />
-    <input type="password" value="" placeholder="Password" id="password" />
-    <button>Submit</button>
+<form method="POST" action='' > {% csrf_token %}
+    <h1>{{ title }}</h1>
+    {{ form }}
+    <input type="submit" name="login">
+    <!-- <input type="text" value="" placeholder="Username" id="username" />
+    <input type="password" value="" placeholder="Password" id="password" /> -->
+    <!-- <button>Submit</button> -->
+</form>
 </div>
 </body>
 
