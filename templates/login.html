@@ -5,17 +5,17 @@
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href='{% static "css/login.css" %}'>
 <meta charset="UTF-8">
-<title>HomeCloud Login</title>
+<title>{{ title }} Login</title>
 </head>
 
-<body>
+<body style="background: url('{% static "images/K.png" %}') no-repeat fixed center center; background-size: cover; font-family: Montserrat;">
 
 <div class="logo"></div>
 <div class="login-block">
 <form method="POST" action='' > {% csrf_token %}
     <h1>{{ title }}</h1>
     {{ form }}
-    <input type="submit" name="login">
+    <button type="submit" name="login"> Submit </button>
     <!-- <input type="text" value="" placeholder="Username" id="username" />
     <input type="password" value="" placeholder="Password" id="password" /> -->
     <!-- <button>Submit</button> -->

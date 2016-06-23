@@ -1,3 +1,4 @@
+/*Style for switch*/
 .onoffswitch {
     position: relative; width: 116px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -45,12 +46,20 @@
     background-color: #34C295; 
 }
 
+
+/*Style for loading img*/
 .unloader {
     display: none;
 }
 
+.unloader-list{
+    display: none;
+}
+
+
 .loader {
     background-color: #ffffff;
+    background-size: cover;
     position: absolute;
     z-index: 1;
     width: 100%;
