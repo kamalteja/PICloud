@@ -31,12 +31,3 @@ def auth_logout(request):
 
 def auth_warn(request):
 	return HttpResponse("<h1>Intruder</h1>")
-
-def relief(request):
-	user = request.user
-	print user
-	if user:
-		return render (request, 'relief.html', {})
-	else:
-		return HttpResponse("<h1>Get Lost</h1>")
-
